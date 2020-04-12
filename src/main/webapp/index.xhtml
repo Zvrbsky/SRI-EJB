@@ -5,8 +5,14 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 	
 <h:body>
+	<h:outputText value="Categories:" />
+	<br/>
+	<ui:repeat value="#{testBean.getAllCategories()}" var="category">
+		<h:outputText value="#{category}" />
+		<br/>
+	</ui:repeat>
+	<br/>
 	<h:form>
-		<h:outputText value="Naciśnij guzik" />
 		<h:commandButton action="#{testBean.test()}" value="Test" />
 	</h:form>
 </h:body>
