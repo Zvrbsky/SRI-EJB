@@ -1,7 +1,9 @@
 package edu.pjwstk.sri.lab2.test;
 
 import edu.pjwstk.sri.lab2.dao.CategoryDao;
+import edu.pjwstk.sri.lab2.dao.ProductDao;
 import edu.pjwstk.sri.lab2.model.Category;
+import edu.pjwstk.sri.lab2.model.Product;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class TestBean implements Serializable {
 
 	@Inject
 	private CategoryDao catService;
+	@Inject
+	private ProductDao prodService;
 	
 	public TestBean() {
 	}
@@ -29,6 +33,7 @@ public class TestBean implements Serializable {
 	public List<Category> getAllCategories() {
 		return catService.listAll();
 	}
-
-
+	public List<Product> getAllProducts() {
+		return prodService.listAll(null, null);
+	}
 }

@@ -12,6 +12,17 @@
 		<br/>
 	</ui:repeat>
 	<br/>
+
+	<h:form>
+		<h:outputText value="Products:" />
+		<br/>
+		<ui:repeat value="#{testBean.getAllProducts()}" var="product">
+			<h:outputText value="#{product}" />
+			<br/>
+		</ui:repeat>
+		<br/>
+	</h:form>
+
 	<h:form>
 		<h:commandButton action="#{testBean.test()}" value="Test" />
 	</h:form>

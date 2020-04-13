@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "Product")
 public class Product implements Serializable {
 
 	@Id
@@ -22,9 +22,9 @@ public class Product implements Serializable {
 	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 
-	@Version
-	@Column(name = "version")
-	private int version;
+//	@Version
+//	@Column(name = "version")
+//	private int version;
 
 	@Column(name = "name", nullable = false)
 	private String name;
@@ -45,13 +45,13 @@ public class Product implements Serializable {
 		this.id = id;
 	}
 
-	public int getVersion() {
-		return this.version;
-	}
+//	public int getVersion() {
+//		return this.version;
+//	}
 
-	public void setVersion(final int version) {
-		this.version = version;
-	}
+//	public void setVersion(final int version) {
+//		this.version = version;
+//	}
 
 	public String getName() {
 		return name;
@@ -66,6 +66,8 @@ public class Product implements Serializable {
 		String result = getClass().getSimpleName() + " ";
 		if (id != null)
 			result += "id: " + id;
+		if (name != null)
+			result += " name: " + name;
 		return result;
 	}
 
