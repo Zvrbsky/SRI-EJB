@@ -50,4 +50,9 @@ public class TestBean implements Serializable {
 	{
 		cart.addToCart(id, amount);
 	}
+
+	public void confirmOrder()
+	{
+		cart.confirmOrder();
+	}
 }

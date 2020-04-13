@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "PRODUCT")
 public class Product implements Serializable {
 
 	@Id

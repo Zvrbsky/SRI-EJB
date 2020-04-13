@@ -3,9 +3,7 @@ package edu.pjwstk.sri.lab2.storage;
 import edu.pjwstk.sri.lab2.model.Category;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Schedule;
-import javax.ejb.Startup;
-import javax.ejb.Singleton;
+import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -20,6 +18,7 @@ public class CategoryStorage {
 
     @PostConstruct
     @Schedule(minute="*/1", hour="*")
+    @Lock(LockType.WRITE)
     public void saveCategories()
     {
         System.out.println("DBG: saveCategories called");
@@ -28,6 +27,7 @@ public class CategoryStorage {
             Category.class).getResultList();
     }
 
+    @Lock(LockType.READ)
     public List<Category> getAllCategories()
     {
         return allCategories;

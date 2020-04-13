@@ -2,10 +2,13 @@ package edu.pjwstk.sri.lab2.dao;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import edu.pjwstk.sri.lab2.exeptions.ItemUnavailableExpection;
 import edu.pjwstk.sri.lab2.model.Product;
 
 /**
@@ -16,6 +19,9 @@ import edu.pjwstk.sri.lab2.model.Product;
 public class ProductDao {
 	@PersistenceContext(unitName = "sri2-persistence-unit")
 	private EntityManager em;
+
+	@Resource
+	EJBContext context;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void create(Product entity) {
@@ -36,8 +42,15 @@ public class ProductDao {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Product update(Product entity) {
-		return em.merge(entity);
+	public Product update(Product entity) throws ItemUnavailableExpection {
+		if (entity.getStock() < 0){
+			context.setRollbackOnly();
+			throw new ItemUnavailableExpection(entity.getName());
+		}
+		Product res = em.merge(entity);
+		em.flush();
+		return res;
+
 	}
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
