@@ -68,6 +68,8 @@ public class Product implements Serializable {
 			result += "id: " + id;
 		if (name != null)
 			result += " name: " + name;
+		if (stock != null)
+			result += " stock: " + stock;
 		return result;
 	}
 

@@ -16,12 +16,24 @@
 	<h:form>
 		<h:outputText value="Products:" />
 		<br/>
+		<h:outputText value="Amount to order:" />
+		<h:inputText value="#{amount}" var="amount"/>
+		<br/>
 		<ui:repeat value="#{testBean.getAllProducts()}" var="product">
 			<h:outputText value="#{product}" />
+			<h:commandButton action="#{testBean.addToCart(product.getId(), amount)}" value="AddToCart" />
 			<br/>
 		</ui:repeat>
 		<br/>
 	</h:form>
+
+	<h:outputText value="Cart:" />
+	<br/>
+	<ui:repeat value="#{testBean.getAllItemsInCart()}" var="item">
+		<h:outputText value="#{item}" />
+		<br/>
+	</ui:repeat>
+	<br/>
 
 	<h:form>
 		<h:commandButton action="#{testBean.test()}" value="Test" />

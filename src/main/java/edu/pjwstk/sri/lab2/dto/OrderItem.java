@@ -20,4 +20,12 @@ public class OrderItem implements Serializable {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderItem{" +
+				"product=" + product.getId() +
+				", amount=" + amount +
+				'}';
+	}
 }
