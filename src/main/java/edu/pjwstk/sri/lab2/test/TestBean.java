@@ -22,12 +22,12 @@ public class TestBean implements Serializable {
 	}
 	
 	public void test() {
-		List<Category> listAll = catService.listAll(null, null);
+		List<Category> listAll = catService.listAll();
 		System.out.println(listAll);
 	}
 
 	public List<Category> getAllCategories() {
-		return catService.listAll(null, null);
+		return catService.listAll();
 	}
 
 

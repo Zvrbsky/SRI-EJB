@@ -1,12 +1,15 @@
 package edu.pjwstk.sri.lab2.dao;
 
+import edu.pjwstk.sri.lab2.model.Category;
+import edu.pjwstk.sri.lab2.storage.CategoryStorage;
+
 import java.util.List;
 
 import javax.ejb.*;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import edu.pjwstk.sri.lab2.model.Category;
 
 /**
  * DAO for Category
@@ -16,6 +19,9 @@ import edu.pjwstk.sri.lab2.model.Category;
 public class CategoryDao {
 	@PersistenceContext(unitName = "sri2-persistence-unit")
 	private EntityManager em;
+
+	@Inject
+	private CategoryStorage categoryStorage;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void create(Category entity) {
@@ -41,17 +47,7 @@ public class CategoryDao {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<Category> listAll(Integer startPosition, Integer maxResult) {
-		TypedQuery<Category> findAllQuery = em
-				.createQuery(
-						"SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.parentCategory LEFT JOIN FETCH c.childCategories ORDER BY c.id",
-						Category.class);
-		if (startPosition != null) {
-			findAllQuery.setFirstResult(startPosition);
-		}
-		if (maxResult != null) {
-			findAllQuery.setMaxResults(maxResult);
-		}
-		return findAllQuery.getResultList();
+	public List<Category> listAll() {
+		return categoryStorage.getAllCategories();
 	}
 }
